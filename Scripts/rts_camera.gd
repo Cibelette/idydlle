@@ -2,12 +2,12 @@ extends Node2D
 
 @export var speed: float = 500.0  # Pixels per second
 @export var zoom_speed: float = 0.1
-@onready var camera_2d: Camera2D = $"."
+
 
 func _process(delta: float):
 	# 1. Get input direction using WASD (Standard UI actions)
 	# Note: Ensure "left", "right", "up", "down" are mapped in Input Map
-	var input_direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var input_direction = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	
 	# 2. Apply movement
 	position += input_direction * speed * delta

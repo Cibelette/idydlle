@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://df4rpok0h54iw" path="res://Assets/Tilesets/Grass.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://b5y1p60sjngof" path="res://Scenes/rts_camera.tscn" id="2_qxrlw"]
+[ext_resource type="PackedScene" uid="uid://pwqshwpwjb57" path="res://Scenes/UI.tscn" id="3_wrm1d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -88,3 +89,5 @@ tile_map_data = PackedByteArray("AADx//b/AAAAAAAAAADy//b/AAABAAAAAADz//b/AAABAAA
 tile_set = SubResource("TileSet_wrm1d")
 
 [node name="RTSCamera" parent="." unique_id=429112930 instance=ExtResource("2_qxrlw")]
+
+[node name="Control" parent="." unique_id=1290331133 instance=ExtResource("3_wrm1d")]
