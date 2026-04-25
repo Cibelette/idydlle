@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://b5y1p60sjngof"]
+
+[ext_resource type="Script" uid="uid://cfehdfik4wvdr" path="res://Scripts/RTScamera.gd" id="1_y3i48"]
+
+[node name="RTSCamera" type="Node2D" unique_id=429112930]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1091824916]
+script = ExtResource("1_y3i48")
