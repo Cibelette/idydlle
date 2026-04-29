@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://02fm25c7lmj4"]
+
+[ext_resource type="Texture2D" uid="uid://c4365kfxwflrh" path="res://Assets/Characters/Basic Charakter Spritesheet.png" id="1_0xcsw"]
+[ext_resource type="Script" uid="uid://dhvbwx3psmngh" path="res://Scripts/Cat.gd" id="2_23j0x"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_23j0x"]
+atlas = ExtResource("1_0xcsw")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2uub"]
+atlas = ExtResource("1_0xcsw")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4x4tm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_23j0x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2uub")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=77996297]
+script = ExtResource("2_23j0x")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1207395925]
+sprite_frames = SubResource("SpriteFrames_4x4tm")
+autoplay = "default"
+
+[node name="Timer" type="Timer" parent="." unique_id=932620505]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

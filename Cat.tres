@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CreatureData" format=3 uid="uid://dkca2tpu0yrm2"]
+
+[ext_resource type="Script" uid="uid://bmqoq12meetm6" path="res://Scripts/CreatureData.gd" id="1_o26ci"]
+
+[resource]
+script = ExtResource("1_o26ci")
+species_name = "Cat"
+metadata/_custom_type_script = "uid://bmqoq12meetm6"

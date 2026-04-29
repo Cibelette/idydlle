@@ -2,7 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://df4rpok0h54iw" path="res://Assets/Tilesets/Grass.png" id="1_ebmjs"]
 [ext_resource type="PackedScene" uid="uid://b5y1p60sjngof" path="res://Scenes/rts_camera.tscn" id="2_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://pwqshwpwjb57" path="res://Scenes/UI.tscn" id="3_wrm1d"]
+[ext_resource type="Script" uid="uid://bif8gpgl5rfxr" path="res://Scripts/ressources.gd" id="3_wrm1d"]
+[ext_resource type="PackedScene" uid="uid://02fm25c7lmj4" path="res://Scenes/cat.tscn" id="4_3dryh"]
+[ext_resource type="Resource" uid="uid://dkca2tpu0yrm2" path="res://Cat.tres" id="5_wowpa"]
+[ext_resource type="PackedScene" uid="uid://pwqshwpwjb57" path="res://Scenes/wood_count.tscn" id="6_i6g32"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
@@ -90,4 +93,28 @@ tile_set = SubResource("TileSet_wrm1d")
 
 [node name="RTSCamera" parent="." unique_id=429112930 instance=ExtResource("2_qxrlw")]
 
-[node name="Control" parent="." unique_id=1290331133 instance=ExtResource("3_wrm1d")]
+[node name="Ressources" type="Node" parent="." unique_id=164217805]
+script = ExtResource("3_wrm1d")
+
+[node name="CharacterBody2D" parent="." unique_id=77996297 instance=ExtResource("4_3dryh")]
+position = Vector2(158, 170)
+creature_info = ExtResource("5_wowpa")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=696807847]
+
+[node name="Control" type="Control" parent="CanvasLayer" unique_id=705926989]
+layout_mode = 3
+anchor_left = 0.03
+anchor_top = 0.04
+anchor_right = 0.082
+anchor_bottom = 0.082
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Control" unique_id=1474244560]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="wood_count" parent="CanvasLayer/Control/VBoxContainer" unique_id=1290331133 instance=ExtResource("6_i6g32")]
+layout_mode = 2
