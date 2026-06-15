@@ -11,14 +11,14 @@ func _ready():
 	# Give it some transparency to show it's a "ghost"
 	modulate.a = 0.5
 
-func _process(_delta):
-	if not is_placed:
-		# Follow the mouse cursor
-		global_position = get_global_mouse_position()
-
 func place():
 	is_placed = true
 	collision.disabled = false
 	modulate.a = 1.0
 	# Set the Z index or layer if necessary to ensure it's behind/in front of things
 	z_index = int(global_position.y) 
+	
+	# Update navigation obstacle if it exists
+	var obstacle = get_node_or_null("NavigationObstacle2D")
+	if obstacle:
+		obstacle.avoidance_enabled = true

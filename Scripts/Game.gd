@@ -14,6 +14,10 @@ func _on_crafting_menu_item_crafted(item_node):
 	add_child(current_placing_item)
 	print("Started placement of ", item_node.name)
 
+func _process(_delta):
+	if current_placing_item != null:
+		current_placing_item.global_position = get_global_mouse_position()
+
 func _input(event):
 	if current_placing_item != null:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:

@@ -34,4 +34,9 @@ autoplay = "default"
 
 [node name="Timer" type="Timer" parent="." unique_id=932620505]
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=1418115594]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_postprocessing = 1
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -6,12 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://02fm25c7lmj4" path="res://Scenes/cat.tscn" id="4_3dryh"]
 [ext_resource type="Resource" uid="uid://dkca2tpu0yrm2" path="res://Cat.tres" id="5_wowpa"]
 [ext_resource type="PackedScene" uid="uid://pwqshwpwjb57" path="res://Scenes/wood_count.tscn" id="6_i6g32"]
-[ext_resource type="PackedScene" path="res://Scenes/CraftingMenu.tscn" id="7_craft_menu"]
+[ext_resource type="PackedScene" uid="uid://cbnpygl4mn6ku" path="res://Scenes/CraftingMenu.tscn" id="7_craft_menu"]
+[ext_resource type="PackedScene" uid="uid://b225mu6f36725" path="res://Scenes/tree.tscn" id="8_v158k"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_abc12"]
+vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qxrlw"]
 texture = ExtResource("1_ebmjs")
 0:0/0 = 0
 1:0/0 = 0
+1:0/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_abc12")
 2:0/0 = 0
 3:0/0 = 0
 4:0/0 = 0
@@ -83,6 +91,7 @@ texture = ExtResource("1_ebmjs")
 8:6/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_wrm1d"]
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_qxrlw")
 
 [node name="Game" type="Node2D" unique_id=76940100]
@@ -95,9 +104,10 @@ tile_set = SubResource("TileSet_wrm1d")
 
 [node name="RTSCamera" parent="." unique_id=429112930 instance=ExtResource("2_qxrlw")]
 
-[node name="CharacterBody2D" parent="." unique_id=77996297 instance=ExtResource("4_3dryh")]
+[node name="Cat" parent="." unique_id=77996297 node_paths=PackedStringArray("habitat") instance=ExtResource("4_3dryh")]
 position = Vector2(158, 170)
 creature_info = ExtResource("5_wowpa")
+habitat = NodePath("../Tree")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=696807847]
 
@@ -119,5 +129,8 @@ offset_bottom = 40.0
 layout_mode = 2
 
 [node name="CraftingMenu" parent="CanvasLayer" unique_id=1219859033 instance=ExtResource("7_craft_menu")]
+
+[node name="Tree" parent="." unique_id=2082116051 instance=ExtResource("8_v158k")]
+position = Vector2(121, 161)
 
 [connection signal="item_crafted" from="CanvasLayer/CraftingMenu" to="." method="_on_crafting_menu_item_crafted"]

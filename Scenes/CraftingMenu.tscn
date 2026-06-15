@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://cbnpygl4mn6ku"]
 
-[ext_resource type="Script" path="res://Scripts/CraftingMenu.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://c8f4rgp52ih1w" path="res://Scripts/CraftingMenu.gd" id="1_script"]
 
-[node name="CraftingMenu" type="Control"]
+[node name="CraftingMenu" type="Control" unique_id=1671119595]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_script")
 
-[node name="OpenButton" type="Button" parent="."]
+[node name="OpenButton" type="Button" parent="." unique_id=801116239]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -27,7 +27,7 @@ grow_horizontal = 0
 grow_vertical = 0
 text = "Craft Menu (C)"
 
-[node name="CraftingPanel" type="Panel" parent="."]
+[node name="CraftingPanel" type="Panel" parent="." unique_id=406012739]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -41,7 +41,7 @@ offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CraftingPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CraftingPanel" unique_id=49760621]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -53,17 +53,26 @@ offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Title" type="Label" parent="CraftingPanel/VBoxContainer"]
+[node name="Title" type="Label" parent="CraftingPanel/VBoxContainer" unique_id=1394947445]
 layout_mode = 2
 text = "CRAFTING"
 horizontal_alignment = 1
 
-[node name="HSeparator" type="HSeparator" parent="CraftingPanel/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="CraftingPanel/VBoxContainer" unique_id=1109217162]
 layout_mode = 2
 
-[node name="CraftChest" type="Button" parent="CraftingPanel/VBoxContainer"]
+[node name="CraftChest" type="Button" parent="CraftingPanel/VBoxContainer" unique_id=2012547969]
 layout_mode = 2
 text = "Wooden Chest (10 Wood)"
 
+[node name="CraftTable" type="Button" parent="CraftingPanel/VBoxContainer" unique_id=1099338628]
+layout_mode = 2
+text = "Wooden Table (15 Wood)"
+
+[node name="CraftStool" type="Button" parent="CraftingPanel/VBoxContainer" unique_id=1930610772]
+layout_mode = 2
+text = "Wooden Table (15 Wood)"
+
 [connection signal="pressed" from="OpenButton" to="." method="_on_open_button_pressed"]
 [connection signal="pressed" from="CraftingPanel/VBoxContainer/CraftChest" to="." method="_on_craft_chest_pressed"]
+[connection signal="pressed" from="CraftingPanel/VBoxContainer/CraftTable" to="." method="_on_craft_table_pressed"]
