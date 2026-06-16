@@ -14,21 +14,22 @@ func _ready():
 	Global.ressource_inventory_updated.connect(update_display)
 
 func setup_counter():
-	if Global.resource_data.has(resource_type):
-		var data = Global.resource_data[resource_type]
-		# Mise à jour automatique de la région de l'icône si le sprite existe
-		if sprite:
-			sprite.region_rect = data["icon_region"]
+	var data = Global.get_resource_data(resource_type)
+	if data:
+		if sprite and data.sprite:
+			sprite.texture = data.sprite
+			sprite.region_enabled = false
 	else:
-		print("Warning: Resource type '", resource_type, "' not found in Global.resource_data")
+		print("Warning: Resource type '", resource_type, "' not found in Global.resource_definitions")
 
 func update_display():
 	if Global.ressource_inventory.has(resource_type):
 		var amount = Global.ressource_inventory[resource_type]
 		var display_text = str(amount)
 		
-		if show_name and Global.resource_data.has(resource_type):
-			display_text = Global.resource_data[resource_type]["display_name"] + ": " + display_text
+		var data = Global.get_resource_data(resource_type)
+		if show_name and data:
+			display_text = data.name + ": " + display_text
 			
 		label.text = display_text
 	else:

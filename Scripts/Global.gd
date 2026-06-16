@@ -3,21 +3,32 @@ extends Node
 
 signal ressource_inventory_updated
 signal furniture_placed(item: Node2D)
-# Dictionnaire centralisant les informations sur les ressources
-var resource_data = {
-	"Wood": {
-		"display_name": "Wood",
-		"icon_region": Rect2(16, 16, 16, 16) # Région dans le sprite sheet
-	},
-	"Berry": {
-		"display_name": "Berries",
-		"icon_region": Rect2(32, 16, 16, 16)
-	},
-	"Stone": {
-		"display_name": "Stones",
-		"icon_region": Rect2(48, 16, 16, 16)
-	}
-}
+
+@export var resource_definitions: Array[ResourceVisualData] = []
+
+func _ready():
+	_load_resource_definitions()
+
+func _load_resource_definitions():
+	var path = "res://Ressources/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				var res = load(path + file_name)
+				if res is ResourceVisualData:
+					resource_definitions.append(res)
+			file_name = dir.get_next()
+	print("Loaded ", resource_definitions.size(), " resource definitions.")
+
+# Helper to quickly find data
+func get_resource_data(type: String) -> ResourceVisualData:
+	for res in resource_definitions:
+		if res and res.type == type:
+			return res
+	return null
 
 # A Dictionary is perfect for keeping track of multiple resource types
 var ressource_inventory = {

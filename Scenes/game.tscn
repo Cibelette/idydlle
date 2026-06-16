@@ -3,9 +3,10 @@
 [ext_resource type="Texture2D" uid="uid://df4rpok0h54iw" path="res://Assets/Tilesets/Grass.png" id="1_ebmjs"]
 [ext_resource type="Script" uid="uid://cp4movt136ywo" path="res://Scripts/Game.gd" id="1_game_script"]
 [ext_resource type="PackedScene" uid="uid://b5y1p60sjngof" path="res://Scenes/rts_camera.tscn" id="2_qxrlw"]
-[ext_resource type="PackedScene" uid="uid://02fm25c7lmj4" path="res://Scenes/cat.tscn" id="4_3dryh"]
+[ext_resource type="PackedScene" uid="uid://02fm25c7lmj4" path="res://Scenes/Creature.tscn" id="4_3dryh"]
 [ext_resource type="PackedScene" uid="uid://pwqshwpwjb57" path="res://Scenes/resource_counter.tscn" id="6_i6g32"]
 [ext_resource type="PackedScene" uid="uid://cbnpygl4mn6ku" path="res://Scenes/CraftingMenu.tscn" id="7_craft_menu"]
+[ext_resource type="Resource" uid="uid://c7m5yq1p8j3v2" path="res://Ressources/tree.tres" id="7_v158k"]
 [ext_resource type="PackedScene" uid="uid://b225mu6f36725" path="res://Scenes/tree.tscn" id="8_v158k"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_abc12"]
@@ -138,19 +139,27 @@ offset_right = 147.0
 offset_bottom = 68.0
 resource_type = "Berry"
 
-[node name="berry_count2" parent="CanvasLayer" unique_id=553587191 instance=ExtResource("6_i6g32")]
+[node name="stone_count" parent="CanvasLayer" unique_id=553587191 instance=ExtResource("6_i6g32")]
 offset_left = 174.0
 offset_top = 26.0
 offset_right = 214.0
 offset_bottom = 66.0
 resource_type = "Stone"
 
-[node name="Tree" parent="." unique_id=2082116051 instance=ExtResource("8_v158k")]
-position = Vector2(120, 168)
-is_placed = true
+[node name="stone_count2" parent="CanvasLayer" unique_id=406914489 instance=ExtResource("6_i6g32")]
+offset_left = 241.0
+offset_top = 24.0
+offset_right = 281.0
+offset_bottom = 64.0
+resource_type = "Fruit"
 
-[node name="Cat" parent="." unique_id=77996297 node_paths=PackedStringArray("habitat") instance=ExtResource("4_3dryh")]
-position = Vector2(156, 169)
-habitat = NodePath("../Tree")
+[node name="Tree" parent="." unique_id=2082116051 instance=ExtResource("8_v158k")]
+position = Vector2(696, 152)
+is_placed = true
+furniture_data = ExtResource("7_v158k")
+
+[node name="Cat" parent="Tree" unique_id=77996297 node_paths=PackedStringArray("habitat") instance=ExtResource("4_3dryh")]
+position = Vector2(-540, 17)
+habitat = NodePath("..")
 
 [connection signal="item_crafted" from="CanvasLayer/CraftingMenu" to="." method="_on_crafting_menu_item_crafted"]
