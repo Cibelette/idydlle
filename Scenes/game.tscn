@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cbnpygl4mn6ku" path="res://Scenes/CraftingMenu.tscn" id="7_craft_menu"]
 [ext_resource type="PackedScene" uid="uid://c2dbeep7q6ayh" path="res://Scenes/chicken.tscn" id="8_h4fw4"]
 [ext_resource type="PackedScene" uid="uid://b225mu6f36725" path="res://Scenes/tree.tscn" id="8_v158k"]
+[ext_resource type="PackedScene" uid="uid://cy7uuawj3uw2f" path="res://Scenes/cow.tscn" id="9_h4fw4"]
+[ext_resource type="PackedScene" uid="uid://ds1l0akvkda6e" path="res://Scenes/chest.tscn" id="10_ldgsr"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_abc12"]
 vertices = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
@@ -139,13 +141,27 @@ offset_right = 147.0
 offset_bottom = 68.0
 resource_type = "Berry"
 
+[node name="berry_count2" parent="CanvasLayer" unique_id=553587191 instance=ExtResource("6_i6g32")]
+offset_left = 174.0
+offset_top = 26.0
+offset_right = 214.0
+offset_bottom = 66.0
+resource_type = "Stone"
+
 [node name="Tree" parent="." unique_id=2082116051 instance=ExtResource("8_v158k")]
 position = Vector2(121, 161)
 
 [node name="Cat" parent="." unique_id=77996297 instance=ExtResource("4_3dryh")]
 position = Vector2(156, 169)
 
-[node name="CharacterBody2D" parent="." unique_id=1212779377 instance=ExtResource("8_h4fw4")]
+[node name="Chicken" parent="." unique_id=1212779377 instance=ExtResource("8_h4fw4")]
 position = Vector2(239, 172)
+
+[node name="Cow" parent="." unique_id=727126077 instance=ExtResource("9_h4fw4")]
+position = Vector2(200, 126)
+
+[node name="Chest" parent="." unique_id=894116509 instance=ExtResource("10_ldgsr")]
+position = Vector2(280, 168)
+is_placed = true
 
 [connection signal="item_crafted" from="CanvasLayer/CraftingMenu" to="." method="_on_crafting_menu_item_crafted"]

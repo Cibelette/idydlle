@@ -5,42 +5,29 @@ signal item_crafted(item_node)
 @onready var crafting_panel = $CraftingPanel
 @onready var item_list = $CraftingPanel/VBoxContainer
 
-# Dictionary to store item data: cost and scene path
-var craftable_items = {
-	"Chest": {
-		"display_name": "Wooden Chest",
-		"cost": 10,
-		"scene": preload("res://Scenes/chest.tscn")
-	},
-	"Table": {
-		"display_name": "Wooden Table",
-		"cost": 15,
-		"scene": preload("res://Scenes/Table.tscn")
-	},
-	"Stool": {
-		"display_name": "Wooden Stool",
-		"cost": 0,
-		"scene": preload("res://Scenes/stool.tscn")
-	}
-	
-}
+@export var craftable_items: Array[FurnitureData]
 
 func _ready():
 	crafting_panel.visible = false
 	setup_menu()
 
 func setup_menu():
-	# Clear existing placeholder buttons (except Title and Separator)
+	# Clear existing placeholder buttons
 	for child in item_list.get_children():
 		if child is Button:
 			child.queue_free()
 	
-	# Create buttons for each craftable item
-	for item_id in craftable_items:
-		var item_data = craftable_items[item_id]
+	# Create buttons for each craftable item resource
+	for item_data in craftable_items:
+		if not item_data: continue
+		
 		var btn = Button.new()
-		btn.text = "%s (%d Wood)" % [item_data["display_name"], item_data["cost"]]
-		btn.pressed.connect(func(): craft_item(item_id))
+		var cost_text = ""
+		for res_type in item_data.costs:
+			cost_text += "%d %s " % [item_data.costs[res_type], res_type]
+		
+		btn.text = "%s (%s)" % [item_data.name, cost_text.strip_edges()]
+		btn.pressed.connect(func(): craft_item(item_data))
 		item_list.add_child(btn)
 
 func _input(event):
@@ -53,17 +40,25 @@ func toggle_menu():
 func _on_open_button_pressed():
 	toggle_menu()
 
-# Generic crafting function
-func craft_item(item_id: String):
-	var item_data = craftable_items[item_id]
-	if Global.spend_resource("Wood", item_data["cost"]):
-		var new_item = item_data["scene"].instantiate()
-		# Explicitly set to false so it starts as a ghost
+# Generic crafting function using Resource
+func craft_item(item_data: FurnitureData):
+	# Check if we can afford all resources
+	var can_afford = true
+	for res_type in item_data.costs:
+		if Global.ressource_inventory.get(res_type, 0) < item_data.costs[res_type]:
+			can_afford = false
+			print("Not enough ", res_type, " to craft ", item_data.name)
+			break
+	
+	if can_afford:
+		# Spend all resources
+		for res_type in item_data.costs:
+			Global.spend_resource(res_type, item_data.costs[res_type])
+			
+		var new_item = item_data.scene.instantiate()
 		if "is_placed" in new_item:
 			new_item.is_placed = false
 		item_crafted.emit(new_item)
 		crafting_panel.visible = false
-	else:
-		print("Not enough Wood to craft ", item_id)
 		
 		

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="CreatureData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/CreatureData.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+species_name = "Chicken"
+produce_amount = 20
+produce_time = 10.0
+resource_type = "Berry"
+sound_text = "Cluck!"

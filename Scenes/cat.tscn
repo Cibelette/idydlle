@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://c4365kfxwflrh" path="res://Assets/Characters/Basic Charakter Spritesheet.png" id="1_0xcsw"]
 [ext_resource type="Script" uid="uid://dhvbwx3psmngh" path="res://Scripts/Creature.gd" id="2_23j0x"]
+[ext_resource type="Resource" uid="uid://dkca2tpu0yrm2" path="res://Ressources/Cat.tres" id="3_data"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_23j0x"]
 atlas = ExtResource("1_0xcsw")
@@ -30,6 +31,7 @@ size = Vector2(16, 16)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=77996297]
 script = ExtResource("2_23j0x")
+data = ExtResource("3_data")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1207395925]
 position = Vector2(0, -3)

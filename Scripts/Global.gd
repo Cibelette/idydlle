@@ -5,15 +5,15 @@ signal ressource_inventory_updated
 # Dictionnaire centralisant les informations sur les ressources
 var resource_data = {
 	"Wood": {
-		"display_name": "Bois",
+		"display_name": "Wood",
 		"icon_region": Rect2(16, 16, 16, 16) # Région dans le sprite sheet
 	},
 	"Berry": {
-		"display_name": "Baies",
+		"display_name": "Berries",
 		"icon_region": Rect2(32, 16, 16, 16)
 	},
 	"Stone": {
-		"display_name": "Pierre",
+		"display_name": "Stones",
 		"icon_region": Rect2(48, 16, 16, 16)
 	}
 }
