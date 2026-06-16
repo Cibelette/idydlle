@@ -1,24 +1,24 @@
-[gd_scene format=3 uid="uid://02fm25c7lmj4"]
+[gd_scene format=3 uid="uid://c2dbeep7q6ayh"]
 
-[ext_resource type="Texture2D" uid="uid://c4365kfxwflrh" path="res://Assets/Characters/Basic Charakter Spritesheet.png" id="1_0xcsw"]
-[ext_resource type="Script" uid="uid://dhvbwx3psmngh" path="res://Scripts/Creature.gd" id="2_23j0x"]
+[ext_resource type="Script" uid="uid://dhvbwx3psmngh" path="res://Scripts/Creature.gd" id="1_jy3mo"]
+[ext_resource type="Texture2D" uid="uid://b03wkjons1jby" path="res://Assets/Characters/Free Chicken Sprites.png" id="2_jy3mo"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_23j0x"]
-atlas = ExtResource("1_0xcsw")
-region = Rect2(0, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_7h841"]
+atlas = ExtResource("2_jy3mo")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_r2uub"]
-atlas = ExtResource("1_0xcsw")
-region = Rect2(48, 0, 48, 48)
+[sub_resource type="AtlasTexture" id="AtlasTexture_jayuq"]
+atlas = ExtResource("2_jy3mo")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4x4tm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_23j0x")
+"texture": SubResource("AtlasTexture_7h841")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_r2uub")
+"texture": SubResource("AtlasTexture_jayuq")
 }],
 "loop": true,
 "name": &"default",
@@ -26,16 +26,18 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_23j0x"]
-size = Vector2(16, 16)
+size = Vector2(14, 14)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=77996297]
-script = ExtResource("2_23j0x")
+script = ExtResource("1_jy3mo")
+creature_type = "chicken"
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1207395925]
-position = Vector2(0, -3)
+position = Vector2(2, -1.0000002)
 scale = Vector2(1.3, 1.3)
 sprite_frames = SubResource("SpriteFrames_4x4tm")
 autoplay = "default"
+frame_progress = 0.20358595
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1418115596]
 shape = SubResource("RectangleShape2D_23j0x")

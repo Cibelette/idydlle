@@ -1,12 +1,34 @@
+@tool
 extends Node
 
 signal ressource_inventory_updated
+# Dictionnaire centralisant les informations sur les ressources
+var resource_data = {
+	"Wood": {
+		"display_name": "Bois",
+		"icon_region": Rect2(16, 16, 16, 16) # Région dans le sprite sheet
+	},
+	"Berry": {
+		"display_name": "Baies",
+		"icon_region": Rect2(32, 16, 16, 16)
+	},
+	"Stone": {
+		"display_name": "Pierre",
+		"icon_region": Rect2(48, 16, 16, 16)
+	}
+}
+
 # A Dictionary is perfect for keeping track of multiple resource types
 var ressource_inventory = {
 	"Wood": 0,
 	"Berry": 0,
 	"Stone": 0
 }
+
+var grid_size: int = 16
+
+func snap_to_grid(pos: Vector2) -> Vector2:
+	return (pos / grid_size).floor() * grid_size + Vector2(grid_size / 2.0, grid_size / 2.0)
 
 
 func add_resource(type: String, amount: int):

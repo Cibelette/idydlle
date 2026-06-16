@@ -58,6 +58,9 @@ func craft_item(item_id: String):
 	var item_data = craftable_items[item_id]
 	if Global.spend_resource("Wood", item_data["cost"]):
 		var new_item = item_data["scene"].instantiate()
+		# Explicitly set to false so it starts as a ghost
+		if "is_placed" in new_item:
+			new_item.is_placed = false
 		item_crafted.emit(new_item)
 		crafting_panel.visible = false
 	else:

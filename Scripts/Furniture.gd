@@ -1,15 +1,31 @@
+@tool
 extends StaticBody2D
 
-var is_placed: bool = false
+@export var is_placed: bool = false
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 
 func _ready():
-	# Initially, collision is disabled while we are placing it
-	collision.disabled = true
-	# Give it some transparency to show it's a "ghost"
-	modulate.a = 0.5
+	if Engine.is_editor_hint():
+		set_notify_transform(true)
+		return
+
+	if is_placed:
+		# If checked in Inspector, finalize immediately
+		place()
+	else:
+		# Initially, collision is disabled while we are placing it
+		collision.disabled = true
+		# Give it some transparency to show it's a "ghost"
+		modulate.a = 0.5
+
+func _notification(what):
+	if Engine.is_editor_hint():
+		if what == NOTIFICATION_TRANSFORM_CHANGED:
+			# Only snap if we are not being actively dragged (optional refinement)
+			# For simplicity, we snap whenever transform changes in editor
+			global_position = (global_position / 16.0).floor() * 16.0 + Vector2(8, 8)
 
 func place():
 	is_placed = true

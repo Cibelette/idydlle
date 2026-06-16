@@ -16,12 +16,55 @@ func _on_crafting_menu_item_crafted(item_node):
 
 func _process(_delta):
 	if current_placing_item != null:
-		current_placing_item.global_position = get_global_mouse_position()
+		current_placing_item.global_position = Global.snap_to_grid(get_global_mouse_position())
+		
+		if is_position_valid():
+			current_placing_item.modulate = Color(1, 1, 1, 0.5)
+		else:
+			current_placing_item.modulate = Color(1, 0, 0, 0.5)
+			
+		queue_redraw()
+
+func is_position_valid() -> bool:
+	if current_placing_item == null: return true
+	
+	var space_state = get_world_2d().direct_space_state
+	var query = PhysicsShapeQueryParameters2D.new()
+	
+	var collision_node = current_placing_item.get_node_or_null("CollisionShape2D")
+	if not collision_node: return true
+	
+	query.shape = collision_node.shape
+	query.transform = current_placing_item.global_transform
+	query.exclude = [current_placing_item.get_rid()]
+	
+	var results = space_state.intersect_shape(query)
+	return results.size() == 0
+
+func _draw():
+	if current_placing_item != null:
+		draw_grid()
+
+func draw_grid():
+	var camera_pos = get_global_mouse_position() # Center around mouse for efficiency
+	
+	var start_x = int(camera_pos.x - 200) / Global.grid_size * Global.grid_size
+	var end_x = int(camera_pos.x + 200) / Global.grid_size * Global.grid_size
+	var start_y = int(camera_pos.y - 200) / Global.grid_size * Global.grid_size
+	var end_y = int(camera_pos.y + 200) / Global.grid_size * Global.grid_size
+	
+	for x in range(start_x, end_x + Global.grid_size, Global.grid_size):
+		draw_line(Vector2(x, start_y), Vector2(x, end_y), Color(1, 1, 1, 0.2), 1.0)
+	for y in range(start_y, end_y + Global.grid_size, Global.grid_size):
+		draw_line(Vector2(start_x, y), Vector2(end_x, y), Color(1, 1, 1, 0.2), 1.0)
 
 func _input(event):
 	if current_placing_item != null:
 		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			finalize_placement()
+			if is_position_valid():
+				finalize_placement()
+			else:
+				print("Cannot place here - space occupied!")
 		elif event.is_action_pressed("ui_cancel"): # Press ESC to cancel placement
 			cancel_placement()
 
