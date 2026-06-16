@@ -147,6 +147,7 @@ resource_type = "Stone"
 
 [node name="Tree" parent="." unique_id=2082116051 instance=ExtResource("8_v158k")]
 position = Vector2(120, 168)
+is_placed = true
 
 [node name="Cat" parent="." unique_id=77996297 node_paths=PackedStringArray("habitat") instance=ExtResource("4_3dryh")]
 position = Vector2(156, 169)
