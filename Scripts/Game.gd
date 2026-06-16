@@ -1,8 +1,38 @@
 extends Node2D
 
 var current_placing_item = null
+var habitat_manager: HabitatManager
 
 @onready var world_node = $Background # Or create a dedicated 'World' node
+
+func _ready():
+	habitat_manager = HabitatManager.new(self)
+	_load_habitat_recipes()
+	Global.furniture_placed.connect(_on_furniture_placed)
+
+func _on_furniture_placed(item):
+	print("[Game] Signal received: Furniture placed, checking habitat...")
+	habitat_manager.check_for_new_habitat(item)
+
+func _load_habitat_recipes():
+	var recipes: Array[HabitatData] = []
+	var path = "res://Ressources/"
+	var dir = DirAccess.open(path)
+	if dir:
+		dir.list_dir_begin()
+		var file_name = dir.get_next()
+		while file_name != "":
+			if not dir.current_is_dir() and file_name.ends_with(".tres"):
+				var full_path = path + file_name
+				var res = load(full_path)
+				if res is HabitatData:
+					recipes.append(res)
+			file_name = dir.get_next()
+	else:
+		print("[Game] Error: Could not open path ", path)
+	
+	habitat_manager.habitat_recipes = recipes
+	print("[Game] Loaded ", recipes.size(), " habitat recipes.")
 
 func _on_crafting_menu_item_crafted(item_node):
 	if current_placing_item != null:
@@ -71,6 +101,8 @@ func _input(event):
 func finalize_placement():
 	if current_placing_item.has_method("place"):
 		current_placing_item.place()
+		# Only emit the signal AFTER the item is successfully placed and validated
+		Global.furniture_placed.emit(current_placing_item)
 		print("Placed ", current_placing_item.name)
 		current_placing_item = null
 	else:

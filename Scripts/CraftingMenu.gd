@@ -56,6 +56,9 @@ func craft_item(item_data: FurnitureData):
 			Global.spend_resource(res_type, item_data.costs[res_type])
 			
 		var new_item = item_data.scene.instantiate()
+		if "furniture_data" in new_item:
+			new_item.furniture_data = item_data
+			
 		if "is_placed" in new_item:
 			new_item.is_placed = false
 		item_crafted.emit(new_item)

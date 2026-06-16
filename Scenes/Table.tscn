@@ -7,6 +7,7 @@
 size = Vector2(46, 30)
 
 [node name="Table" type="StaticBody2D" unique_id=1134970973]
+position = Vector2(8, 8)
 script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1230966753]
@@ -18,8 +19,3 @@ region_rect = Rect2(0, 30.30954, 48.32254, 33.593452)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1462445709]
 position = Vector2(25, 18)
 shape = SubResource("RectangleShape2D_ab3gw")
-
-[node name="NavigationObstacle2D" type="NavigationObstacle2D" parent="." unique_id=1418115596]
-position = Vector2(25, 18)
-avoidance_enabled = false
-radius = 24.0

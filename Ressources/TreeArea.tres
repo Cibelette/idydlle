@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="HabitatData" format=3 uid="uid://d07cblk81dau1"]
+
+[ext_resource type="Script" uid="uid://bkuhhp5f81uqc" path="res://Scripts/HabitatData.gd" id="1_sqbvt"]
+
+[resource]
+script = ExtResource("1_sqbvt")
+recipe = {
+"Tree": 1
+}
+metadata/_custom_type_script = "uid://bkuhhp5f81uqc"

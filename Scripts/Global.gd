@@ -2,6 +2,7 @@
 extends Node
 
 signal ressource_inventory_updated
+signal furniture_placed(item: Node2D)
 # Dictionnaire centralisant les informations sur les ressources
 var resource_data = {
 	"Wood": {

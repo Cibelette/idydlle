@@ -13,6 +13,25 @@ var is_moving: bool = false
 @onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
 @onready var production_timer: Timer = $Timer # On réutilise le timer existant dans la scène
 
+func _process(delta):
+	if is_moving:
+		velocity = (target_position - global_position).normalized() * movement_speed
+		move_and_slide()
+		
+		if global_position.distance_to(target_position) < 5.0:
+			is_moving = false
+	elif randf() < 0.01: # Random chance to wander
+		_wander()
+
+func _wander():
+	var center = global_position
+	if habitat:
+		center = habitat.global_position
+	
+	var offset = Vector2(randf_range(-wander_radius, wander_radius), randf_range(-wander_radius, wander_radius))
+	target_position = center + offset
+	is_moving = true
+
 func _ready():
 	# Configuration de la production basée sur les données de la ressource
 	if production_timer and data:

@@ -2,6 +2,7 @@
 extends StaticBody2D
 
 @export var is_placed: bool = false
+@export var furniture_data: FurnitureData
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
@@ -29,6 +30,7 @@ func _notification(what):
 
 func place():
 	is_placed = true
+	add_to_group("furniture")
 	collision.disabled = false
 	modulate.a = 1.0
 	# Set the Z index or layer if necessary to ensure it's behind/in front of things

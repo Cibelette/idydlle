@@ -1,14 +1,16 @@
-[gd_scene format=3 uid="uid://b225mu6f36725"]
+[gd_scene load_steps=4 format=3 uid="uid://b225mu6f36725"]
 
-[ext_resource type="Texture2D" uid="uid://bes5p4jeu47ke" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="1_0vwjc"]
+[ext_resource type="Script" uid="uid://cvk7083t4b7nd" path="res://Scripts/Furniture.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bes5p4jeu47ke" path="res://Assets/Objects/Basic Grass Biom things 1.png" id="2_0vwjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rsuno"]
 size = Vector2(16, 16)
 
 [node name="Tree" type="StaticBody2D" unique_id=2082116051]
+script = ExtResource("1_script")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=57739393]
-texture = ExtResource("1_0vwjc")
+texture = ExtResource("2_0vwjc")
 region_enabled = true
 region_rect = Rect2(18.339214, 0, 26.904488, 32.641666)
 
